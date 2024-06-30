@@ -3,8 +3,8 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:myapp/chat_agent/chat_agent.dart';
 import 'package:myapp/chat_agent/message.dart';
 
-import 'package:myapp/gemini/model_options.dart';
-import 'package:myapp/gemini/chat_options.dart';
+import 'package:myapp/chat_agent/gemini/model_options.dart';
+import 'package:myapp/chat_agent/gemini/chat_options.dart';
 
 class GeminiChatAgent implements ChatAgent<GeminiChatOptions> {
   late GenerativeModel _model;
