@@ -38,6 +38,22 @@ class ResponseMessage extends Message {
     this.text = text;
     sender = Role.model;
   }
+
+  factory ResponseMessage.fromJson(Map<String, dynamic> json) {
+    return switch (json) {
+      {
+        'error': String? error,
+        'usage': UsageData? usage,
+        'text': String? text
+      } =>
+        ResponseMessage(
+          error: error,
+          usage: usage,
+          text: text,
+        ),
+      _ => throw const FormatException("Invalid response received")
+    };
+  }
 }
 
 class UsageData {

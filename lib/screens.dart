@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Screens/settings_screen.dart';
 
-import 'Screens/home_screen.dart';
-import 'Screens/notifications_screen.dart';
+import 'Screens/chat_screen.dart';
 
 class Screen {
   final NavigationDestination destination;
@@ -13,49 +13,20 @@ class Screen {
 }
 
 const screens = <String, Screen>{
-  'home': Screen(
+  'chat': Screen(
     destination: NavigationDestination(
-      selectedIcon: Icon(Icons.home),
-      icon: Icon(Icons.home_outlined),
-      label: 'Home',
+      selectedIcon: Icon(Icons.message),
+      icon: Icon(Icons.message_outlined),
+      label: 'Chat',
     ),
-    screen: HomeScreen(),
+    screen: ChatScreen(),
   ),
-  'notifications': Screen(
+  'settings': Screen(
     destination: NavigationDestination(
-      selectedIcon: Icon(Icons.home),
-      icon: Icon(Icons.home_outlined),
-      label: 'Notifications',
+      selectedIcon: Icon(Icons.settings),
+      icon: Icon(Icons.settings_outlined),
+      label: 'Settings',
     ),
-    screen: NotificationsScreen(),
+    screen: SettingsScreen(),
   ),
-  'messages': Screen(
-    destination: NavigationDestination(
-      selectedIcon: Icon(Icons.home),
-      icon: Icon(Icons.home_outlined),
-      label: 'Messages',
-    ),
-    screen: MessagesScreen(),
-  )
 };
-
-class MessagesScreen extends StatelessWidget {
-  const MessagesScreen({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Card(
-      shadowColor: Colors.transparent,
-      margin: EdgeInsets.all(8.0),
-      child: SizedBox.expand(
-        child: Center(
-          child: Text(
-            'Messages',
-          ),
-        ),
-      ),
-    );
-  }
-}

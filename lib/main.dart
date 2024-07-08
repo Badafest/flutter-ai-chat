@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:myapp/app_state.dart';
 import 'package:myapp/screens.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+Future main() async {
+  await dotenv.load(fileName: '.env');
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppState(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,21 +35,25 @@ class HomeComponent extends StatefulWidget {
 }
 
 class _HomeComponentState extends State<HomeComponent> {
-  String screenName = "home";
+  String screenName = screens.keys.elementAt(0);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: screens.keys.toList().indexOf(screenName),
-        onDestinationSelected: (index) {
-          setState(() {
-            screenName = screens.keys.elementAt(index);
-          });
-        },
-        destinations:
-            screens.values.map((screen) => screen.destination).toList(),
-      ),
-      body: screens[screenName]?.screen,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: screens.keys.toList().indexOf(screenName),
+            onDestinationSelected: (index) {
+              setState(() {
+                screenName = screens.keys.elementAt(index);
+              });
+            },
+            destinations:
+                screens.values.map((screen) => screen.destination).toList(),
+          ),
+          body: SafeArea(
+            child: screens[screenName]!.screen,
+          )),
     );
   }
 }
